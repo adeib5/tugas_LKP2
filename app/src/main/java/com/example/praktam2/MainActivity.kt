@@ -14,18 +14,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
 import com.example.praktam2.model.Game
 import com.example.praktam2.model.GameSource
 import com.example.praktam2.ui.theme.Praktam2Theme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Praktam2Theme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color(0xFF05508C) // background silver
                 ) {
                     GameScreen()
                 }
@@ -36,12 +38,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GameScreen() {
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         item {
             Text(
                 text = "🎮 Daftar Game",
@@ -52,16 +56,22 @@ fun GameScreen() {
         items(GameSource.dummyGame) { game ->
             GameItem(game)
         }
+
     }
 }
 
 @Composable
 fun GameItem(game: Game) {
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFA9A7A7)
+        )
     ) {
+
         Column(modifier = Modifier.padding(12.dp)) {
 
             Image(
@@ -90,6 +100,20 @@ fun GameItem(game: Game) {
                 text = "Tahun: ${game.tahun}",
                 style = MaterialTheme.typography.labelMedium
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Button(
+                onClick = { },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50),
+                    contentColor = Color.White
+                )
+            ) {
+                Text("Join")
+            }
+
         }
     }
 }
